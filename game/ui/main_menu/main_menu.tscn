@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/main_menu/boombox_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://world/battle/background01.png" type="Texture" id=2]
 [ext_resource path="res://ui/main_menu/main_menu.gd" type="Script" id=3]
+[ext_resource path="res://entities/player/ships/Ship 1.png" type="Texture" id=4]
+[ext_resource path="res://entities/player/ships/ship02.png" type="Texture" id=5]
 
 [node name="main_menu" type="Control"]
 anchor_right = 1.0
@@ -13,7 +15,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 1152.82, 538.103 )
+position = Vector2( 1154.6, 538.103 )
 texture = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
@@ -27,7 +29,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="."]
+[node name="start_button" type="Button" parent="."]
 margin_left = 444.216
 margin_top = 489.09
 margin_right = 1463.21
@@ -38,4 +40,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[node name="ship1_select_button" type="Button" parent="."]
+margin_left = 1020.0
+margin_top = 696.0
+margin_right = 2105.0
+margin_bottom = 1896.0
+rect_scale = Vector2( 0.2, 0.2 )
+toggle_mode = true
+icon = ExtResource( 5 )
+
+[node name="ship2_select_button" type="Button" parent="."]
+margin_left = 644.0
+margin_top = 700.0
+margin_right = 1791.0
+margin_bottom = 1908.0
+rect_scale = Vector2( 0.19, 0.19 )
+toggle_mode = true
+icon = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="start_button" to="." method="_on_Button_pressed"]
