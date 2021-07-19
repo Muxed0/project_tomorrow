@@ -1,8 +1,7 @@
 extends Control
 
 func _on_Button_pressed():
-	if $"/root/ShipData".ship_type != 0:
-		get_tree().change_scene("res://world/battle/battle_stage_1.tscn")
+	get_tree().change_scene("res://world/battle/battle_stage_1.tscn")
 
 
 func _on_ship1_select_button_button_down():
