@@ -14,6 +14,10 @@ config/name="project_tomorrow"
 run/main_scene="res://ui/main_menu/main_menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+ShipData="*res://entities/player/ship_data.gd"
+
 [display]
 
 window/size/width=1920

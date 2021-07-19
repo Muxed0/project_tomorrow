@@ -62,3 +62,5 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="start_button" to="." method="_on_Button_pressed"]
+[connection signal="button_down" from="ship1_select_button" to="." method="_on_ship1_select_button_button_down"]
+[connection signal="button_down" from="ship2_select_button" to="." method="_on_ship2_select_button_button_down"]
