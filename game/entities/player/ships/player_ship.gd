@@ -16,11 +16,11 @@ func _ready():
 	ship_data = get_node("/root/ShipData")
 	
 	match ship_data.ship_type:
-		1:
-			
+		0:
 			ship_texture = load("res://entities/player/ships/Ship 1.png")
-		2:
+		1:
 			ship_texture = load("res://entities/player/ships/ship02.png")
+
 	$ship_sprite.texture = ship_texture
 
 func _physics_process(delta):

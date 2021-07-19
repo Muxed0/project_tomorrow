@@ -6,10 +6,10 @@ func _on_Button_pressed():
 
 
 func _on_ship1_select_button_button_down():
-	$"/root/ShipData".ship_type = 2
+	$"/root/ShipData".ship_type = 1
 	$ship2_select_button.pressed = false
 
 
 func _on_ship2_select_button_button_down():
-	$"/root/ShipData".ship_type = 1
+	$"/root/ShipData".ship_type = 0
 	$ship1_select_button.pressed = false
