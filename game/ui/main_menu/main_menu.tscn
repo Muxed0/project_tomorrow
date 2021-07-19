@@ -48,6 +48,9 @@ margin_bottom = 1896.0
 rect_scale = Vector2( 0.2, 0.2 )
 toggle_mode = true
 icon = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ship2_select_button" type="Button" parent="."]
 margin_left = 644.0
