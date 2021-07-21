@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/arrow-Body.obj-6130272a352f67a598177ef566c9b65b.mesh"
+
+[deps]
+
+files=[ "res://.import/arrow-Body.obj-6130272a352f67a598177ef566c9b65b.mesh" ]
+
+source_file="res://testing/arrow-Body.obj"
+dest_files=[ "res://.import/arrow-Body.obj-6130272a352f67a598177ef566c9b65b.mesh", "res://.import/arrow-Body.obj-6130272a352f67a598177ef566c9b65b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 0.005, 0.005, 0.005 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

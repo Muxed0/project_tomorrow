@@ -15,7 +15,7 @@ var total_thrust = 0
 var spin = 0
 
 func _ready():
-	rotation = PI/4
+	rotation = PI/6
 	
 	ship_data = get_node("/root/ShipData")
 	
@@ -41,8 +41,7 @@ func _physics_process(delta):
 	total_thrust = engine_burn - retro_burn
 	applied_force = Vector2(total_thrust * sin(rotation), -total_thrust * cos(rotation))
 	applied_torque = TORQUE * spin
-	if position.y == 0:
-		print("position reset!")
+
 	ship_data.ship_position = position
 	ship_data.ship_velocity = Vector3(linear_velocity.x,linear_velocity.y,angular_velocity)
 	

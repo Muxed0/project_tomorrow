@@ -1,0 +1,161 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://testing/arrow-Body.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://testing/slider_label.gd" type="Script" id=2]
+[ext_resource path="res://testing/sphere.gd" type="Script" id=3]
+[ext_resource path="res://testing/slider_label2.gd" type="Script" id=4]
+[ext_resource path="res://testing/rolltex.png" type="Texture" id=5]
+[ext_resource path="res://testing/ball_should_roll.gd" type="Script" id=6]
+
+[sub_resource type="CapsuleMesh" id=1]
+radius = 0.5
+
+[sub_resource type="CubeMesh" id=8]
+size = Vector3( 0.1, 10, 0.1 )
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_texture = ExtResource( 5 )
+
+[sub_resource type="SphereMesh" id=10]
+material = SubResource( 9 )
+radius = 2.0
+height = 4.0
+
+[sub_resource type="CapsuleMesh" id=2]
+radius = 0.1
+mid_height = 5.0
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0, 0.6, 1, 1 )
+
+[sub_resource type="CapsuleMesh" id=4]
+radius = 0.1
+mid_height = 5.0
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.823529, 0, 0, 1 )
+
+[sub_resource type="CapsuleMesh" id=6]
+radius = 0.1
+mid_height = 5.0
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 0, 0.913725, 0.164706, 1 )
+
+[node name="3D_motion_test" type="Spatial"]
+
+[node name="arrow" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+visible = false
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.909789, 0.0103515, 0.414941, 0.0129136, 0.998499, -0.0532234, -0.41487, 0.0537805, 0.90829, 8.35919, 1.32791, 15.7761 )
+current = true
+
+[node name="slider_label" type="Label" parent="Camera"]
+margin_left = 141.07
+margin_top = 1014.22
+margin_right = 181.07
+margin_bottom = 1062.22
+text = "Theta
+
+Phi"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="theta_slider" type="HSlider" parent="Camera/slider_label"]
+margin_left = 96.5285
+margin_top = -2.69189
+margin_right = 1604.53
+margin_bottom = 13.3081
+max_value = 360.0
+tick_count = 360
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="phi_slider" type="HSlider" parent="Camera/slider_label"]
+margin_left = 96.0149
+margin_top = 28.7554
+margin_right = 1604.01
+margin_bottom = 44.7554
+max_value = 360.0
+tick_count = 360
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="slider_label2" type="Label" parent="Camera"]
+margin_left = 30.5898
+margin_top = 962.286
+margin_right = 78.5898
+margin_bottom = 976.286
+text = "Zeta   V"
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="zeta_slider" type="VSlider" parent="Camera/slider_label2"]
+margin_left = -1.94003
+margin_top = -854.599
+margin_right = 14.06
+margin_bottom = -28.5991
+max_value = 360.0
+tick_count = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="v_slider" type="VSlider" parent="Camera/slider_label2"]
+margin_left = 36.3025
+margin_top = -849.863
+margin_right = 52.3025
+margin_bottom = -31.863
+max_value = 0.05
+step = 0.005
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sphere" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8 )
+mesh = SubResource( 1 )
+material/0 = null
+script = ExtResource( 3 )
+
+[node name="zeta_pill" type="MeshInstance" parent="sphere"]
+transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0, -8 )
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="ball_should_roll" type="MeshInstance" parent="sphere"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8 )
+mesh = SubResource( 10 )
+material/0 = null
+script = ExtResource( 6 )
+
+[node name="z_pill" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.29171 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="x_pill" type="MeshInstance" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.33997, 0, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="y_pill" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.34865, 0 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 7 )
+
+[connection signal="value_changed" from="Camera/slider_label/theta_slider" to="sphere" method="_on_theta_slider_value_changed"]
+[connection signal="value_changed" from="Camera/slider_label/phi_slider" to="sphere" method="_on_phi_slider_value_changed"]
+[connection signal="value_changed" from="Camera/slider_label2/zeta_slider" to="sphere" method="_on_zeta_slider_value_changed"]
