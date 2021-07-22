@@ -1,14 +1,19 @@
 extends Camera
 
-export var SPEED_SCALE = 0.0001
+export var SPEED_SCALE = 0.000001
 
-const full_circle = 2 * PI
-
-var velocity_norm = 0
-var direction = 0
 var radius = 0
-var rot_axis = Vector3(0,0,0)
 var rot_speed = 0
+var previous_rotation = Vector2(0,0)
+var wrap_counter = Vector2(0,0)
+
+var a = 0
+var b = 0
+var z_quad = Vector2(0,0)
+var z = 0
+var midsection_pos = Vector2(0,0)
+
+var velocity_basis = Basis(Vector3(1,0,0),Vector3(0,1,0),Vector3(0,0,1))
 
 var ship_data = 0
 
@@ -20,13 +25,30 @@ func _ready():
 	radius = translation.z
 
 func _process(delta):
-	rot_axis = ship_data.ship_velocity.normalized()
 	rot_speed = ship_data.ship_velocity.length()
+	
+	#Y is the rotation axis,  Z is the velocity vector in 3D, mapped on the sphere
+	velocity_basis = transform.basis * Basis(Vector3(0,0,1),
+										Vector3(ship_data.ship_velocity.y, ship_data.ship_velocity.x, 0).normalized(),
+										Vector3(-ship_data.ship_velocity.x, ship_data.ship_velocity.y, 0).normalized())
+	
 	if rot_speed != 0:
-		rotate_object_local(Vector3(rot_axis.y,rot_axis.x,rot_axis.z), rot_speed * SPEED_SCALE)
+		rotate(velocity_basis.y, rot_speed * SPEED_SCALE)
 	
 	translation.y = - radius * sin(rotation.x)
 	translation.x = radius * cos(rotation.x) * sin(rotation.y)
 	translation.z = radius * cos(rotation.x) * cos(rotation.y)
 	
-	print(rotation_degrees)
+	a = velocity_basis.y.x
+	b = velocity_basis.y.z
+	z_quad.x = a*a + b*b
+	z_quad.y = radius*radius * a*a
+	z = sqrt(4 * z_quad.x * z_quad.y)/(2 * z_quad.x)
+	midsection_pos.x = -(z * b)/a
+	midsection_pos.y = z
+	$"../debug_indicator".translation = Vector3(midsection_pos.x,0,midsection_pos.y)
+
+	$"../debug_pill".transform.basis = velocity_basis
+	
+	if delta != 0:
+		$"../../../player_cam/debug_ui/process_fps".text = str(1/delta)

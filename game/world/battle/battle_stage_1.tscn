@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://world/battle/background01.png" type="Texture" id=1]
 [ext_resource path="res://entities/player/ships/player_ship.tscn" type="PackedScene" id=2]
@@ -10,6 +10,34 @@
 [ext_resource path="res://ui/speed_arrow.gd" type="Script" id=8]
 [ext_resource path="res://ui/global_label.gd" type="Script" id=9]
 [ext_resource path="res://world/places/3D_place_1.tscn" type="PackedScene" id=10]
+[ext_resource path="res://world/battle/moon01.png" type="Texture" id=11]
+
+[sub_resource type="SphereMesh" id=4]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="CylinderShape" id=7]
+radius = 7.0
+height = 0.3
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="SphereMesh" id=2]
+material = SubResource( 1 )
+radius = 0.25
+height = 0.5
+
+[sub_resource type="CapsuleMesh" id=3]
+radius = 0.1
+mid_height = 10.0
+
+[sub_resource type="CapsuleMesh" id=5]
+radius = 0.1
+mid_height = 7.0
+
+[sub_resource type="CubeMesh" id=6]
+size = Vector3( 0.1, 10, 10 )
 
 [node name="battle_stage_1" type="Node2D"]
 script = ExtResource( 3 )
@@ -24,10 +52,42 @@ render_target_v_flip = true
 [node name="Spatial" type="Spatial" parent="3D_viewport"]
 
 [node name="3D_cam" type="Camera" parent="3D_viewport/Spatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.79735 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7 )
+current = true
 script = ExtResource( 7 )
 
+[node name="debug_spaceship" type="MeshInstance" parent="3D_viewport/Spatial/3D_cam"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="render_plane" type="Area" parent="3D_viewport/Spatial/3D_cam"]
+
+[node name="CollisionShape" type="CollisionShape" parent="3D_viewport/Spatial/3D_cam/render_plane"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -7 )
+shape = SubResource( 7 )
+
 [node name="3D_place_1" parent="3D_viewport/Spatial" instance=ExtResource( 10 )]
+
+[node name="debug_indicator" type="MeshInstance" parent="3D_viewport/Spatial"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="debug_pill" type="MeshInstance" parent="3D_viewport/Spatial"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="MeshInstance" type="MeshInstance" parent="3D_viewport/Spatial/debug_pill"]
+transform = Transform( 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="debug_cam" type="Camera" parent="3D_viewport/Spatial"]
+transform = Transform( 0.989249, 0, 0.146238, 0, 1, 0, -0.146238, 0, 0.989249, -1.82297, -1, 15.7113 )
+
+[node name="debug_plane" type="MeshInstance" parent="3D_viewport/Spatial"]
+visible = false
+mesh = SubResource( 6 )
+material/0 = null
 
 [node name="player_cam" type="Camera2D" parent="."]
 current = true
@@ -78,7 +138,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="process_fps" type="Label" parent="player_cam/debug_ui"]
+margin_left = -955.02
+margin_top = -510.268
+margin_right = -824.02
+margin_bottom = -449.268
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="player_ship" parent="." instance=ExtResource( 2 )]
+
+[node name="Moon" type="Sprite" parent="."]
+position = Vector2( 2000, -2000 )
+texture = ExtResource( 11 )
 
 [connection signal="wrap_x" from="3D_viewport/Spatial/3D_cam" to="player_ship" method="_on_3D_cam_wrap_x"]
 [connection signal="wrap_x" from="3D_viewport/Spatial/3D_cam" to="." method="_on_3D_cam_wrap_x"]

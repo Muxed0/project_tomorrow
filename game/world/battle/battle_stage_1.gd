@@ -5,8 +5,6 @@ var player_pos = Vector2(0,0)
 
 func _ready():
 	player = get_node("player_ship")
-	print("ready!")
-	
 
 func _process(delta):
 	player_pos = $player_ship.position
