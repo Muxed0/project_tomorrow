@@ -73,6 +73,7 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="debug_pill" type="MeshInstance" parent="3D_viewport/Spatial"]
+visible = false
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -83,6 +84,7 @@ material/0 = null
 
 [node name="debug_cam" type="Camera" parent="3D_viewport/Spatial"]
 transform = Transform( 0.989249, 0, 0.146238, 0, 1, 0, -0.146238, 0, 0.989249, -1.82297, -1, 15.7113 )
+current = true
 
 [node name="debug_plane" type="MeshInstance" parent="3D_viewport/Spatial"]
 visible = false
@@ -148,6 +150,7 @@ __meta__ = {
 }
 
 [node name="player_ship" parent="." instance=ExtResource( 2 )]
+angular_damp = -1.0
 
 [node name="Moon" type="Sprite" parent="."]
 position = Vector2( 2000, -2000 )
