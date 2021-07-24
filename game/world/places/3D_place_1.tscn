@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://world/places/background1.png" type="Texture" id=1]
 [ext_resource path="res://world/places/planet01.png" type="Texture" id=2]
@@ -28,16 +28,8 @@ ambient_light_sky_contribution = 0.99
 radius = 0.25
 height = 0.5
 
-[sub_resource type="SphereShape" id=6]
-radius = 0.1
-
-[sub_resource type="SpatialMaterial" id=8]
-albedo_color = Color( 0, 0.0627451, 1, 1 )
-
-[sub_resource type="SphereMesh" id=7]
-material = SubResource( 8 )
-radius = 0.01
-height = 0.02
+[sub_resource type="RayShape" id=6]
+length = 3.20497
 
 [node name="3D_place_1" type="Spatial"]
 
@@ -52,17 +44,14 @@ environment = SubResource( 4 )
 transform = Transform( 0.864713, 0.235683, -0.443536, 0, 0.88307, 0.46924, 0.502266, -0.405758, 0.763603, 0, 0, 9.5475 )
 shadow_enabled = true
 
-[node name="Area" type="Area" parent="."]
+[node name="moon_area" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.95, 4.95, 0 )
 
-[node name="moon" type="MeshInstance" parent="Area"]
+[node name="moon" type="MeshInstance" parent="moon_area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, -0.15, 0 )
 mesh = SubResource( 5 )
 material/0 = null
 
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
+[node name="CollisionShape" type="CollisionShape" parent="moon_area"]
+transform = Transform( -4.37114e-08, -0.707107, 0.707107, 0, 0.707107, 0.707107, -1, 3.09086e-08, -3.09086e-08, -1, -1, 0 )
 shape = SubResource( 6 )
-
-[node name="moon_core" type="MeshInstance" parent="Area"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.707, -0.707, 0 )
-mesh = SubResource( 7 )
-material/0 = null

@@ -15,7 +15,7 @@ var total_thrust = 0
 var spin = 0
 
 func _ready():
-	rotation = PI/4
+	rotation = 15*PI/64
 	linear_velocity = Vector2(1,-1)
 	
 	ship_data = get_node("/root/ShipData")

@@ -1,11 +1,20 @@
 extends Node2D
 
+#This 
+
 var player = 0
 var player_pos = Vector2(0,0)
 var p = 0
 var smo = Vector3(0,0,0)
+var smo_cam = Vector3(0,0,0)
 var smo2 = 0
+var smo2_length = Vector2(0,0)
 var whatever = Vector2(0,0)
+var ship_vector_pos = Vector3(0,0,0)
+
+var avg_delta = 0
+var total_delta = 0
+var frame_count = 0
 
 var entity_array = []
 
@@ -20,6 +29,14 @@ func _ready():
 	player = get_node("player_ship")
 
 func _process(delta):
+	
+	if frame_count < 120:
+		frame_count += 1
+	else:
+		total_delta = total_delta - avg_delta
+	total_delta += delta
+	avg_delta = (total_delta)/frame_count
+	
 	player_pos = $player_ship.position
 	$player_cam.position = player_pos
 	$background.position = player_pos
@@ -28,16 +45,15 @@ func _process(delta):
 	$background.texture = texture
 	
 	if entity_array.size():
-		smo = $"3D_viewport/Spatial/3D_cam".translation - entity_array[0].translation
-		#print($"3D_viewport/Spatial/3D_cam".translation.length(),",",entity_array[0].translation.length())
-		#p = smo.length()/2 * asin(smo.length()/(2*7)) * delta * $"3D_viewport/Spatial/3D_cam".SPEED_SCALE
-		smo2 = smo.length()* delta * $"3D_viewport/Spatial/3D_cam".SPEED_SCALE
-		smo = $"3D_viewport/Spatial/3D_cam".transform.basis * smo
-		whatever = Vector2(smo.x,smo.y).normalized()
-		$debug_vector.set_point_position(1,$player_ship.position + Vector2(whatever.x * smo2, -whatever.y * smo2))
-		$Moon.position = $player_ship.position + Vector2(whatever.x * smo2, -whatever.y * smo2)
-		print(smo.length(),",",Vector2(whatever.x * smo2, -whatever.y * smo2))
-		#print($Moon.position)
+		ship_vector_pos = $"3D_viewport/Spatial/3D_cam".translation + $"3D_viewport/Spatial/3D_cam".transform.basis * $"3D_viewport/Spatial/3D_cam/render_box".translation
+		smo = ship_vector_pos - entity_array[0].translation
+		smo_cam = $"3D_viewport/Spatial/3D_cam".transform.basis * smo
+		smo2 = Vector2(smo_cam.x,smo_cam.y)
+		smo2_length = smo2.length()* avg_delta * $"3D_viewport/Spatial/3D_cam".SPEED_SCALE
+		whatever = Vector2(smo_cam.x,smo_cam.y).normalized()
+		$debug_vector.set_point_position(1,$player_ship.position + Vector2(whatever.y * smo2_length, -whatever.x * smo2_length))
+		$Moon.position = $player_ship.position + Vector2(whatever.y * smo2_length, -whatever.x * smo2_length)
+		print(avg_delta)
 	
 	
 func _on_3D_cam_wrap_x():
@@ -49,4 +65,4 @@ func _on_3D_cam_wrap_y():
 
 func _on_render_box_area_entered(area):
 	entity_array.append(area)
-	#print(entity_array[entity_array.size()-1]," ready to render! ", area.translation)
+	print(entity_array[entity_array.size()-1]," ready to render! ")
