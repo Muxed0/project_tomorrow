@@ -1,6 +1,6 @@
 extends Camera
 
-export var SPEED_SCALE = 0.00001
+export var SPEED_SCALE = 100000
 
 var radius = 0
 var rot_speed = 0
@@ -25,15 +25,12 @@ func _ready():
 	radius = translation.z
 
 func _process(delta):
-	rot_speed = ship_data.ship_velocity.length()
-	
 	#Y is the rotation axis,  Z is the velocity vector in 3D, mapped on the sphere
 	velocity_basis = transform.basis * Basis(Vector3(0,0,1),
 										Vector3(ship_data.ship_velocity.y, ship_data.ship_velocity.x, 0).normalized(),
 										Vector3(-ship_data.ship_velocity.x, ship_data.ship_velocity.y, 0).normalized())
-	
-	if rot_speed != 0:
-		rotate(velocity_basis.y, rot_speed * SPEED_SCALE)
+	if ship_data.ship_velocity.length() != 0:
+		rotate(velocity_basis.y, ship_data.ship_velocity.length() / SPEED_SCALE)
 	
 	translation.y = - radius * sin(rotation.x)
 	translation.x = radius * cos(rotation.x) * sin(rotation.y)
