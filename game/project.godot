@@ -16,7 +16,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-ShipData="*res://entities/player/ship_data.gd"
+PlayerData="*res://entities/player/player_data.gd"
 
 [display]
 

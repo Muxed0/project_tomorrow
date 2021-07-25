@@ -15,22 +15,19 @@ var midsection_pos = Vector3(0,0,0)
 
 var velocity_basis = Basis(Vector3(1,0,0),Vector3(0,1,0),Vector3(0,0,1))
 
-var ship_data = 0
-
-signal wrap_x
-signal wrap_y
+var player_data = 0
 
 func _ready():
-	ship_data = get_node("/root/ShipData")
+	player_data = get_node("/root/PlayerData")
 	radius = translation.z
 
 func _process(delta):
 	#Y is the rotation axis,  Z is the velocity vector in 3D, mapped on the sphere
 	velocity_basis = transform.basis * Basis(Vector3(0,0,1),
-										Vector3(ship_data.ship_velocity.y, ship_data.ship_velocity.x, 0).normalized(),
-										Vector3(-ship_data.ship_velocity.x, ship_data.ship_velocity.y, 0).normalized())
-	if ship_data.ship_velocity.length() != 0:
-		rotate(velocity_basis.y, ship_data.ship_velocity.length() / SPEED_SCALE)
+										Vector3(player_data.ship_velocity.y, player_data.ship_velocity.x, 0).normalized(),
+										Vector3(-player_data.ship_velocity.x, player_data.ship_velocity.y, 0).normalized())
+	if player_data.ship_velocity.length() != 0:
+		rotate(velocity_basis.y, player_data.ship_velocity.length() / SPEED_SCALE)
 	
 	translation.y = - radius * sin(rotation.x)
 	translation.x = radius * cos(rotation.x) * sin(rotation.y)

@@ -2,7 +2,7 @@ extends RigidBody2D
 
 var reset = Vector2(0,0)
 
-var ship_data = 0
+var player_data = 0
 var ship_texture = 0
 
 export var ENGINE_THRUST = 700
@@ -18,9 +18,9 @@ func _ready():
 	rotation = 15*PI/64
 	linear_velocity = Vector2(1,-1)
 	
-	ship_data = get_node("/root/ShipData")
+	player_data = get_node("/root/PlayerData")
 	
-	match ship_data.ship_type:
+	match player_data.ship_type:
 		0:
 			ship_texture = load("res://entities/player/ships/Ship 1.png")
 		1:
@@ -43,8 +43,8 @@ func _physics_process(delta):
 	applied_force = Vector2(total_thrust * sin(rotation), -total_thrust * cos(rotation))
 	applied_torque = TORQUE * spin
 
-	ship_data.ship_position = position
-	ship_data.ship_velocity = Vector3(linear_velocity.x,linear_velocity.y,angular_velocity)
+	player_data.ship_position = position
+	player_data.ship_velocity = Vector3(linear_velocity.x,linear_velocity.y,angular_velocity)
 	
 	$"../player_cam/debug_ui/physics_fps".text = str(1/delta)
 	
@@ -67,11 +67,3 @@ func _input(event):
 			spin += 1
 		elif event.is_action_released("move_right"):
 			spin -= 1
-
-
-func _on_3D_cam_wrap_x():
-	reset.x = 1
-
-
-func _on_3D_cam_wrap_y():
-	reset.y = 1
