@@ -176,6 +176,7 @@ shape = SubResource( 9 )
 zoom = Vector2( 100, 100 )
 
 [node name="debug_vector" type="Line2D" parent="."]
+visible = false
 points = PoolVector2Array( 0, 0, 0, 0 )
 script = ExtResource( 8 )
 

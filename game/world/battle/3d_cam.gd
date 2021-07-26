@@ -52,6 +52,6 @@ func _process(delta):
 		print(wrap_counter)
 
 	previous_pos = translation
-	$"../debug_pill".transform.basis = velocity_basis
+	#$"../debug_pill".transform.basis = velocity_basis
 	
 	#This script has been tested and is NOT the reason for your FPS loss

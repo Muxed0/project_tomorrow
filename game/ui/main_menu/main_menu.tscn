@@ -40,7 +40,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ship1_select_button" type="Button" parent="."]
+[node name="ship2_select_button" type="Button" parent="."]
 margin_left = 1135.97
 margin_top = 509.324
 margin_right = 2220.97
@@ -52,7 +52,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ship2_select_button" type="Button" parent="."]
+[node name="ship1_select_button" type="Button" parent="."]
 margin_left = 503.993
 margin_top = 514.738
 margin_right = 1650.99
@@ -86,7 +86,7 @@ toggle_mode = true
 text = "Living World"
 
 [connection signal="pressed" from="start_button" to="." method="_on_Button_pressed"]
-[connection signal="button_down" from="ship1_select_button" to="." method="_on_ship1_select_button_button_down"]
 [connection signal="button_down" from="ship2_select_button" to="." method="_on_ship2_select_button_button_down"]
-[connection signal="pressed" from="planet1_select" to="." method="_on_planet1_select_pressed"]
-[connection signal="pressed" from="planet2_select" to="." method="_on_planet2_select_pressed"]
+[connection signal="button_down" from="ship1_select_button" to="." method="_on_ship1_select_button_button_down"]
+[connection signal="button_down" from="planet1_select" to="." method="_on_planet1_select_button_down"]
+[connection signal="button_down" from="planet2_select" to="." method="_on_planet2_select_button_down"]
