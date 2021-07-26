@@ -54,5 +54,4 @@ func _process(delta):
 	previous_pos = translation
 	$"../debug_pill".transform.basis = velocity_basis
 	
-	if delta != 0:
-		$"../../../player_cam/debug_ui/process_fps".text = str(1/delta)
+	#This script has been tested and is NOT the reason for your FPS loss

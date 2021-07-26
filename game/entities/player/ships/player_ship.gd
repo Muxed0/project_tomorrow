@@ -21,9 +21,9 @@ func _ready():
 	player_data = get_node("/root/PlayerData")
 	
 	match player_data.ship_type:
-		0:
-			ship_texture = load("res://entities/player/ships/Ship 1.png")
 		1:
+			ship_texture = load("res://entities/player/ships/Ship 1.png")
+		2:
 			ship_texture = load("res://entities/player/ships/ship02.png")
 
 	$ship_sprite.texture = ship_texture

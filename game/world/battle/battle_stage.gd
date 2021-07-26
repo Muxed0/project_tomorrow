@@ -1,6 +1,9 @@
 extends Node2D
 
 var player_data = 0
+var world_data = 0
+var stage = 0
+var stage_instance = 0
 var spatial_cam = 0
 
 var avg_delta = 0
@@ -25,7 +28,16 @@ func _input(event):
 
 func _ready():
 	player_data = get_node("/root/PlayerData")
+	world_data = get_node("/root/WorldData")
 	spatial_cam = get_node("3D_viewport/spatial_map/3D_cam")
+	
+	match world_data.current_stage:
+		1:
+			stage = load("res://world/places/3D_place_1.tscn")
+		2:
+			stage = load("res://world/places/3D_place_2.tscn")
+	stage_instance = stage.instance()
+	$"3D_viewport/spatial_map".add_child(stage_instance)
 
 func _process(delta):
 	#Smoothing out the delta value for use in positioning permanent entities and returning follower entities.
@@ -51,10 +63,10 @@ func _on_render_box_area_entered(area):
 	perm_area_array.append(area)
 	perm_entity_array.append(area.entity2D.instance())
 	add_child(perm_entity_array[perm_entity_array.size() - 1])
-	print(perm_entity_array[perm_entity_array.size()-1]," ready to render! ")
+	#print(perm_entity_array[perm_entity_array.size()-1]," ready to render! ")
 
 func _on_render_box_area_exited(area):
-	print(perm_entity_array[perm_entity_array.size()-1]," No longer rendered! ")
+	#print(perm_entity_array[perm_entity_array.size()-1]," No longer rendered! ")
 	var remove_index = perm_area_array.find(area)
 	perm_entity_array.remove(remove_index)
 	perm_area_array.remove(remove_index)

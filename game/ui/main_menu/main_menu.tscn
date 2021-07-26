@@ -30,10 +30,10 @@ __meta__ = {
 }
 
 [node name="start_button" type="Button" parent="."]
-margin_left = 444.216
-margin_top = 489.09
-margin_right = 1463.21
-margin_bottom = 628.703
+margin_left = 428.66
+margin_top = 342.012
+margin_right = 1447.65
+margin_bottom = 481.625
 custom_fonts/font = ExtResource( 1 )
 text = "Start Game"
 __meta__ = {
@@ -41,10 +41,10 @@ __meta__ = {
 }
 
 [node name="ship1_select_button" type="Button" parent="."]
-margin_left = 1020.0
-margin_top = 696.0
-margin_right = 2105.0
-margin_bottom = 1896.0
+margin_left = 1135.97
+margin_top = 509.324
+margin_right = 2220.97
+margin_bottom = 1709.32
 rect_scale = Vector2( 0.2, 0.2 )
 toggle_mode = true
 icon = ExtResource( 5 )
@@ -53,10 +53,10 @@ __meta__ = {
 }
 
 [node name="ship2_select_button" type="Button" parent="."]
-margin_left = 644.0
-margin_top = 700.0
-margin_right = 1791.0
-margin_bottom = 1908.0
+margin_left = 503.993
+margin_top = 514.738
+margin_right = 1650.99
+margin_bottom = 1722.74
 rect_scale = Vector2( 0.19, 0.19 )
 toggle_mode = true
 icon = ExtResource( 4 )
@@ -64,6 +64,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="planet1_select" type="Button" parent="."]
+margin_left = 374.767
+margin_top = 855.599
+margin_right = 839.767
+margin_bottom = 926.599
+custom_fonts/font = ExtResource( 1 )
+toggle_mode = true
+text = "Blue mist"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="planet2_select" type="Button" parent="."]
+margin_left = 940.452
+margin_top = 855.599
+margin_right = 1569.45
+margin_bottom = 926.599
+custom_fonts/font = ExtResource( 1 )
+toggle_mode = true
+text = "Living World"
+
 [connection signal="pressed" from="start_button" to="." method="_on_Button_pressed"]
 [connection signal="button_down" from="ship1_select_button" to="." method="_on_ship1_select_button_button_down"]
 [connection signal="button_down" from="ship2_select_button" to="." method="_on_ship2_select_button_button_down"]
+[connection signal="pressed" from="planet1_select" to="." method="_on_planet1_select_pressed"]
+[connection signal="pressed" from="planet2_select" to="." method="_on_planet2_select_pressed"]
