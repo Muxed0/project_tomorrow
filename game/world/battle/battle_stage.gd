@@ -38,6 +38,9 @@ func _ready():
 			stage = load("res://world/places/3D_place_2.tscn")
 	stage_instance = stage.instance()
 	$"3D_viewport/spatial_map".add_child(stage_instance)
+	
+	stage_instance.connect("in_sight", self, "_on_battle_stage_in_sight")
+	stage_instance.connect("out_sight", self, "_on_battle_stage_out_sight")
 
 func _process(delta):
 	#Smoothing out the delta value for use in positioning permanent entities and returning follower entities.
@@ -58,15 +61,15 @@ func _process(delta):
 		ship_to_entity_2d_dir = ship_to_entity_2d.normalized()
 		perm_entity_array[i].position = $player_ship.position + Vector2(ship_to_entity_2d_dir.y * ship_to_entity_2d_pix_length, -ship_to_entity_2d_dir.x * ship_to_entity_2d_pix_length)
 		$debug_vector.set_point_position(1,perm_entity_array[0].position)
+	
+func _on_battle_stage_in_sight(type, area3D, entity2D):
+	if type == 1:
+		perm_area_array.append(area3D)
+		perm_entity_array.append(entity2D.instance())
+		add_child(perm_entity_array[perm_entity_array.size() - 1])
 
-func _on_render_box_area_entered(area):
-	perm_area_array.append(area)
-	perm_entity_array.append(area.entity2D.instance())
-	add_child(perm_entity_array[perm_entity_array.size() - 1])
-	#print(perm_entity_array[perm_entity_array.size()-1]," ready to render! ")
-
-func _on_render_box_area_exited(area):
-	#print(perm_entity_array[perm_entity_array.size()-1]," No longer rendered! ")
-	var remove_index = perm_area_array.find(area)
-	perm_entity_array.remove(remove_index)
-	perm_area_array.remove(remove_index)
+func _on_battle_stage_out_sight(type, area3D):
+	if type == 1:
+		var remove_index = perm_area_array.find(area3D)
+		perm_entity_array.remove(remove_index)
+		perm_area_array.remove(remove_index)

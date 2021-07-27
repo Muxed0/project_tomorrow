@@ -179,6 +179,3 @@ zoom = Vector2( 100, 100 )
 visible = false
 points = PoolVector2Array( 0, 0, 0, 0 )
 script = ExtResource( 8 )
-
-[connection signal="area_entered" from="3D_viewport/spatial_map/3D_cam/render_box" to="." method="_on_render_box_area_entered"]
-[connection signal="area_exited" from="3D_viewport/spatial_map/3D_cam/render_box" to="." method="_on_render_box_area_exited"]
