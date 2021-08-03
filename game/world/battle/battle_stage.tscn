@@ -18,7 +18,7 @@ radius = 0.25
 height = 0.5
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 1, 0, 1 )
+extents = Vector3( 2, 1, 0 )
 
 [sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -74,7 +74,6 @@ material/0 = null
 [node name="render_box" type="Area" parent="3D_viewport/spatial_map/3D_cam"]
 
 [node name="render_box_shape" type="CollisionShape" parent="3D_viewport/spatial_map/3D_cam/render_box"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 2 )
 
 [node name="debug_indicator" type="MeshInstance" parent="3D_viewport/spatial_map"]
@@ -92,7 +91,7 @@ mesh = SubResource( 6 )
 material/0 = null
 
 [node name="debug_cam" type="Camera" parent="3D_viewport/spatial_map"]
-transform = Transform( 0.780198, 0.0890214, 0.619165, 0.0251857, 0.984549, -0.173291, -0.625025, 0.150795, 0.765901, 9.19096, 1.48631, 7.44786 )
+transform = Transform( 0.0227503, -0.628226, 0.777698, 0.0642671, 0.77721, 0.625951, -0.997673, 0.0357399, 0.058056, 7.95644, 7.63939, 0.228457 )
 
 [node name="debug_plane" type="MeshInstance" parent="3D_viewport/spatial_map"]
 visible = false
@@ -176,6 +175,9 @@ shape = SubResource( 9 )
 zoom = Vector2( 100, 100 )
 
 [node name="debug_vector" type="Line2D" parent="."]
-visible = false
 points = PoolVector2Array( 0, 0, 0, 0 )
 script = ExtResource( 8 )
+
+[node name="debug_y_vector" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 0, 0 )
+default_color = Color( 0.839216, 1, 0.4, 1 )

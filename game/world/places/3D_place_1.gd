@@ -1,5 +1,7 @@
 extends Spatial
 
+var radius = 7
+
 var moon_area = 0
 var moon_entity2D = preload("res://entities/trash/Moon01.tscn")
 #In sight signal should hold: 
@@ -15,6 +17,13 @@ func _on_moon_area_area_entered(area):
 	print(moon_area)
 	emit_signal("in_sight", 1, moon_area, moon_entity2D)
 
-
 func _on_moon_area_area_exited(area):
 	emit_signal("out_sight", 1, moon_area)
+
+
+func _on_follower_area_entered(area):
+	emit_signal("in_sight", 2, 0, 0)
+
+
+func _on_follower_area_exited(area):
+	emit_signal("out_sight", 2, 0)

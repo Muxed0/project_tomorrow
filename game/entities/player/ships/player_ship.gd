@@ -14,10 +14,7 @@ var retro_burn = 0
 var total_thrust = 0
 var spin = 0
 
-func _ready():
-	rotation = 15*PI/64
-	linear_velocity = Vector2(1,-1)
-	
+func _enter_tree():
 	player_data = get_node("/root/PlayerData")
 	
 	match player_data.ship_type:
@@ -27,6 +24,9 @@ func _ready():
 			ship_texture = load("res://entities/player/ships/ship02.png")
 
 	$ship_sprite.texture = ship_texture
+	
+func _ready():
+	pass
 	
 func _integrate_forces(state):
 	if reset.x:
